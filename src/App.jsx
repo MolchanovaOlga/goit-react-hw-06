@@ -5,7 +5,6 @@ import './App.css';
 import SearchBox from './components/SearchBox/SearchBox';
 import ContactList from './components/ContactList/ContactList';
 import ContactForm from './components/ContactForm/ContactForm';
-import { useDispatch, useSelector } from 'react-redux';
 
 const dataArr = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -26,63 +25,17 @@ function App() {
   //   return JSON.parse(dataFromLS);
   // });
 
-  const inputFilterVal = useSelector(
-    state => state.contactReducer.filters.name
-  );
-  const contacts = useSelector(state => state.contactReducer.contacts.items);
-
-  const arrFilterContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(inputFilterVal.toLowerCase().trim())
-  );
-
-  const dispatch = useDispatch();
-
-  const handleImputFilterVal = ev => {
-    //setimputFilterVal(ev.target.value);
-    const setFilters = {
-      type: 'filters/setFilters',
-      payload: ev.target.value,
-    };
-    dispatch(setFilters);
-  };
-
-  const addContact = newContact => {
-    // setContacts(prevContacts => {
-    //   return [...prevContacts, newContact];
-    // });
-    const addContacts = {
-      type: 'contacts/addContacts',
-      payload: newContact,
-    };
-    dispatch(addContacts);
-  };
-
-  const handleDeleteContact = idContact => {
-    // setContacts(contacts.filter(contact => contact.id !== idContact));
-    const deleteContacts = {
-      type: 'contacts/deleteContacts',
-      payload: idContact,
-    };
-    dispatch(deleteContacts);
-  };
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   localStorage.setItem(key, JSON.stringify(selectContacts));
+  // }, [selectContacts]);
 
   return (
     <>
       <div>
         <h1 className="title">Phonebook</h1>
-        <ContactForm onAdd={addContact} />
-        <SearchBox
-          imputFilterVal={inputFilterVal}
-          handleImputFilterVal={handleImputFilterVal}
-        />
-        <ContactList
-          contacts={arrFilterContacts}
-          handleDelete={handleDeleteContact}
-        />
+        <ContactForm />
+        <SearchBox />
+        <ContactList />
       </div>
     </>
   );

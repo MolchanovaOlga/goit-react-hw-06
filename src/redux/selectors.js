@@ -1,5 +1,4 @@
 export const getFilterName = state => {
-  console.log(state);
   return state.filters.name;
 };
 

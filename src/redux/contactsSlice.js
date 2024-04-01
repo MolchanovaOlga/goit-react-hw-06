@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-//const key = 'currentContacts';
-
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: { items: [] },
